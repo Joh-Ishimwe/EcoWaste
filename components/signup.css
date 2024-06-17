@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.login-container, .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-box, .signup-box {
+    width: 90%;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    background-color:#77B900;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #77B900;
+}
+
+.signup .forgot-password, .login .forgot-password {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.signup .forgot-password a, .login .forgot-password a {
+    color: #77B900;
+    text-decoration: none;
+}
+
+.signup .signup-link, .login .signup-link {
+    margin-top: 20px;
+}
+
+.signup .signup-link a, .login .signup-link a {
+    color: #77B900;
+    text-decoration: none;
+}
+
+.signup .signup-link a:hover, .login .signup-link a:hover {
+    text-decoration: underline;
+}
