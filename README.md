@@ -1,4 +1,4 @@
-#EcoWaste
+#EcoWaste 
 
 ## Overview
 
@@ -29,4 +29,3 @@ This is an Enterprise Web Development Project which focuses on building a compre
    ```bash
    git clone https://github.com/your-username/EcoWaste.git
    cd EcoWaste
-
