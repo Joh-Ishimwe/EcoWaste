@@ -3,58 +3,21 @@ body {
     margin: 0;
     padding: 0;
 }
-<<<<<<< HEAD
-.hh{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-.main {
-    background: #77B900;
-    color: white;
-    padding: 10px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
-.contact-item img{
-    max-width: 20px;
-}
+
 header {
-=======
-
-.main {
->>>>>>> dc4a8d79e7597f84b48e16d4fcbfbbe5d77a8382
     background: #77B900;
     color: white;
-    padding: 10px 30px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-<<<<<<< HEAD
     min-height: 30px;
-
 }
 
 .contact-info span, .social-links a {
-    margin: -20px 10px;
-}
-.contact-item{
-    margin-left: 0px;
-=======
-    
+    margin: 0 10px;
 }
 
-.contact-info span, .social-links a {
-    margin: 0 15px;
-}
-.contact-info img {
-    height: 12px;
->>>>>>> dc4a8d79e7597f84b48e16d4fcbfbbe5d77a8382
-}
 .social-links a {
     color: white;
     text-decoration: none;
@@ -65,17 +28,12 @@ nav {
     justify-content: space-between;
     align-items: center;
     background: white;
-    padding: 10px 30px;
+    padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 nav .logo img {
-<<<<<<< HEAD
     height: 70px;
-    margin-left:50px ;
-=======
-    height: 50px;
->>>>>>> dc4a8d79e7597f84b48e16d4fcbfbbe5d77a8382
 }
 
 nav .nav-links {
