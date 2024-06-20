@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Waste Management System</title>
+    <link rel="stylesheet" href="../EcoWaste/components/header.css">
+    <title>EcoWaste System</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,11 +15,62 @@
             min-height: 100vh;
         }
 
-        header, footer {
+      
+
+        .contact-info span, .social-links a {
+            margin: 0 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav .logo img {
+            height: 70px;
+        }
+
+        nav .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        nav .nav-links li {
+            margin: 0 15px;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        nav .donate-btn {
+            background:  #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        footer {
             background-color: #4CAF50;
             color: white;
             text-align: center;
             padding: 1em 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         main {
@@ -84,6 +136,22 @@
             padding: 20px;
         }
 
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .schedule-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
         .recycling-table {
             width: 100%;
             border-collapse: collapse;
@@ -99,12 +167,23 @@
             background-color: #4CAF50;
             color: white;
         }
+        .h1{
+            font-size: xx-large;
+        }
+        h2{
+            margin-left: 200px;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Smart Waste Management System</h1>
-    </header>
+    
+    <nav>
+        <div class="logo">
+            <img src="../images/GUARD (1).png" alt="EcoWaste">
+        </div>
+        <p class="h1">EcoWaste System</p>
+        <a href="./components/main.html" class="donate-btn">Logout</a>
+    </nav>
 
     <main>
         <!-- Dashboard Section -->
@@ -112,18 +191,22 @@
             <h2>Dashboard</h2>
             <nav>
                 <button id="schedule-waste">Schedule Waste Collection</button>
+                <button id="view-schedule">View Collection Schedule</button>
                 <button id="track-recycling">Track Recycling Efforts</button>
-                <button id="logout">Logout</button>
+                <button id="logout"></button>
             </nav>
 
             <div id="content">
-                <!-- Dynamic Content will be injected here -->
+                
+                
+        <p>This is some static content that appears below the navigation buttons.</p>
+
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Smart Waste Management System</p>
+        <p>&copy; 2024 EcoWaste System</p>
     </footer>
 
     <script>
@@ -148,6 +231,43 @@
                     const location = document.getElementById('collection-location').value;
                     // Schedule waste collection logic here
                     console.log('Waste collection scheduled for:', { date, time, location });
+                });
+            });
+
+            document.getElementById('view-schedule').addEventListener('click', function () {
+                loadContent('Upcoming Waste Collection Schedule', `
+                    <h3>Upcoming Waste Collection Schedule</h3>
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-data">
+                            <!-- Schedule data will be dynamically loaded here -->
+                        </tbody>
+                    </table>
+                `);
+
+                // Example schedule data
+                const scheduleData = [
+                    { date: '2024-06-21', time: '08:00', location: 'Main Street' },
+                    { date: '2024-06-22', time: '10:00', location: '2nd Avenue' },
+                    { date: '2024-06-23', time: '09:00', location: '3rd Boulevard' }
+                ];
+
+                const scheduleDataTbody = document.getElementById('schedule-data');
+                scheduleData.forEach(item => {
+                    const row = `
+                        <tr>
+                            <td>${item.date}</td>
+                            <td>${item.time}</td>
+                            <td>${item.location}</td>
+                        </tr>
+                    `;
+                    scheduleDataTbody.innerHTML += row;
                 });
             });
 
