@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="otp.css">
+</head>
+<body>
+    <div class="otp-container">
+        <h1>OTP Verification</h1>
+        <p>Please enter the 6-digit code sent to your phone</p>
+        <div class="otp-input-container">
+            <input type="text" id="otp1" maxlength="1" onkeyup="moveToNext(this, 'otp2')">
+            <input type="text" id="otp2" maxlength="1" onkeyup="moveToNext(this, 'otp3')">
+            <input type="text" id="otp3" maxlength="1" onkeyup="moveToNext(this, 'otp4')">
+            <input type="text" id="otp4" maxlength="1" onkeyup="moveToNext(this, 'otp5')">
+            <input type="text" id="otp5" maxlength="1" onkeyup="moveToNext(this, 'otp6')">
+            <input type="text" id="otp6" maxlength="1" onkeyup="moveToNext(this, '')">
+        </div>
+        <button href="login.html" onclick="verifyOTP()">Verify OTP</button>
+    </div>
+
+    <script>
+        function moveToNext(current, nextFieldID) {
+            if (current.value.length === current.maxLength) {
+                if (nextFieldID) {
+                    document.getElementById(nextFieldID).focus();
+                } else {
+                    verifyOTP();
+                }
+            }
+        }
+
+        function verifyOTP() {
+            const otp = [
+                document.getElementById('otp1').value,
+                document.getElementById('otp2').value,
+                document.getElementById('otp3').value,
+                document.getElementById('otp4').value,
+                document.getElementById('otp5').value,
+                document.getElementById('otp6').value
+            ].join('');
+
+            // Replace with your OTP verification logic
+            alert('Entered OTP: ' + otp);
+
+            // Example of verification logic
+            if (otp === "123456") { // Replace "123456" with actual OTP for verification
+                alert("OTP Verified Successfully!");
+            } else {
+                alert("Invalid OTP. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>
