@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
+    <div id="header"></div>
     <div class="login-container">
         <div class="login-box">
             <h2>User Login</h2>
@@ -30,5 +31,22 @@
             </form>
         </div>
     </div>
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+            
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                });
+        });
+    </script>
 </body>
 </html>

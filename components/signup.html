@@ -25,8 +25,13 @@
                     <input type="password" id="password" name="password" required>
                 </div>
                 <div class="input-group">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    <label for="role">User Role</label>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Select your role</option>
+                        <option value="household">Household User</option>
+                        <option value="waste-collection">Waste Collection Service</option>
+                        <option value="admin">Administrator</option>
+                    </select>
                 </div>
                 <button type="submit">Signup</button>
                 <div class="login-link">

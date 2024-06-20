@@ -5,26 +5,24 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    
+    background-color: #f0f0f0;
 }
 
-.login-container, .signup-container {
+.signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 450px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 500px;
     padding: 20px;
+    margin: 50px 500px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.login-box, .signup-box {
-    width: 90%;
+.signup-box {
+    width: 100%;
     text-align: center;
 }
 
@@ -43,7 +41,8 @@ h2 {
     font-weight: bold;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -52,9 +51,9 @@ h2 {
 
 button {
     width: 100%;
-    margin: 10px;
+    margin: 10px 0;
     padding: 10px;
-    background-color:#77B900;
+    background-color: #77B900;
     color: white;
     border: none;
     border-radius: 5px;
@@ -63,28 +62,18 @@ button {
 }
 
 button:hover {
-    background-color: #77B900;
+    background-color: #66A500;
 }
 
-.signup .forgot-password, .login .forgot-password {
-    text-align: right;
-    margin-bottom: 20px;
-}
-
-.signup .forgot-password a, .login .forgot-password a {
-    color: #77B900;
-    text-decoration: none;
-}
-
-.signup .signup-link, .login .signup-link {
+.login-link {
     margin-top: 20px;
 }
 
-.signup .signup-link a, .login .signup-link a {
+.login-link a {
     color: #77B900;
     text-decoration: none;
 }
 
-.signup .signup-link a:hover, .login .signup-link a:hover {
+.login-link a:hover {
     text-decoration: underline;
 }

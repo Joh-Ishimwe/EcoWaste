@@ -3,7 +3,25 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.hh{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.main {
+    background: #77B900;
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.contact-item img{
+    max-width: 20px;
+}
 header {
     background: #77B900;
     color: white;
@@ -12,12 +30,15 @@ header {
     justify-content: space-between;
     align-items: center;
     min-height: 30px;
+
 }
 
 .contact-info span, .social-links a {
-    margin: 0 10px;
+    margin: -20px 10px;
 }
-
+.contact-item{
+    margin-left: 0px;
+}
 .social-links a {
     color: white;
     text-decoration: none;
@@ -34,6 +55,7 @@ nav {
 
 nav .logo img {
     height: 70px;
+    margin-left:50px ;
 }
 
 nav .nav-links {
