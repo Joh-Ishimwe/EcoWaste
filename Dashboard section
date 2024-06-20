@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Waste Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header, footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        section {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        nav button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        nav button:hover {
+            background-color: #45a049;
+        }
+
+        #content {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .recycling-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .recycling-table th, .recycling-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .recycling-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Smart Waste Management System</h1>
+    </header>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard-section">
+            <h2>Dashboard</h2>
+            <nav>
+                <button id="schedule-waste">Schedule Waste Collection</button>
+                <button id="track-recycling">Track Recycling Efforts</button>
+                <button id="logout">Logout</button>
+            </nav>
+
+            <div id="content">
+                <!-- Dynamic Content will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Smart Waste Management System</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dashboardSection = document.getElementById('dashboard-section');
+
+            document.getElementById('schedule-waste').addEventListener('click', function () {
+                loadContent('Schedule Waste Collection', `
+                    <h3>Schedule Waste Collection</h3>
+                    <form id="schedule-form">
+                        <input type="date" id="collection-date" required>
+                        <input type="time" id="collection-time" required>
+                        <input type="text" id="collection-location" placeholder="Location" required>
+                        <button type="submit">Schedule</button>
+                    </form>
+                `);
+
+                document.getElementById('schedule-form').addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const date = document.getElementById('collection-date').value;
+                    const time = document.getElementById('collection-time').value;
+                    const location = document.getElementById('collection-location').value;
+                    // Schedule waste collection logic here
+                    console.log('Waste collection scheduled for:', { date, time, location });
+                });
+            });
+
+            document.getElementById('track-recycling').addEventListener('click', function () {
+                loadContent('Track Recycling Efforts', `
+                    <h3>Recycling Tracker</h3>
+                    <p>Track your recycling efforts and view your environmental impact.</p>
+                    <table class="recycling-table">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Amount (kg)</th>
+                                <th>Price per kg ($)</th>
+                                <th>Total Value ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recycling-data">
+                            <!-- Recycling data will be dynamically loaded here -->
+                        </tbody>
+                    </table>
+                `);
+
+                // Example recycling data
+                const recyclingData = [
+                    { material: 'Plastic', amount: 10, pricePerKg: 0.5 },
+                    { material: 'Glass', amount: 5, pricePerKg: 0.2 },
+                    { material: 'Paper', amount: 20, pricePerKg: 0.1 }
+                ];
+
+                const recyclingDataTbody = document.getElementById('recycling-data');
+                recyclingData.forEach(item => {
+                    const totalValue = item.amount * item.pricePerKg;
+                    const row = `
+                        <tr>
+                            <td>${item.material}</td>
+                            <td>${item.amount}</td>
+                            <td>${item.pricePerKg}</td>
+                            <td>${totalValue.toFixed(2)}</td>
+                        </tr>
+                    `;
+                    recyclingDataTbody.innerHTML += row;
+                });
+            });
+
+            function loadContent(title, content) {
+                const contentDiv = document.getElementById('content');
+                contentDiv.innerHTML = `<h2>${title}</h2>${content}`;
+            }
+        });
+    </script>
+</body>
+</html>
