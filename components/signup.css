@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     padding: 0;
@@ -8,7 +9,12 @@ body {
     background-color: #f0f0f0;
 }
 
+<<<<<<< HEAD
 .signup-container {
+=======
+
+.login-container, .signup-container {
+>>>>>>> dc4a8d79e7597f84b48e16d4fcbfbbe5d77a8382
     display: flex;
     justify-content: center;
     align-items: center;
