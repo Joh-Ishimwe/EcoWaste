@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../EcoWaste/components/header.css">
-    <title>EcoWaste System</title>
+    <title>Waste Collector Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +15,15 @@
             min-height: 100vh;
         }
 
-      
+        .toph {
+            background:  #4CAF50;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
 
         .contact-info span, .social-links a {
             margin: 0 10px;
@@ -71,6 +79,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: auto; /* Push footer to bottom */
         }
 
         main {
@@ -80,12 +89,20 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
         }
 
         section {
             width: 100%;
             max-width: 600px;
             margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         form {
@@ -93,10 +110,12 @@
             flex-direction: column;
         }
 
-        form input {
+        form input, form select {
             margin-bottom: 10px;
             padding: 10px;
             font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         form button {
@@ -105,35 +124,20 @@
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         form button:hover {
             background-color: #45a049;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        nav button {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            flex: 1;
-            margin: 0 5px;
-        }
-
-        nav button:hover {
-            background-color: #45a049;
-        }
-
         #content {
             border: 1px solid #ccc;
             padding: 20px;
+            margin: 20px 30px; /* Add margin to separate from the buttons */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .schedule-table {
@@ -152,30 +156,38 @@
             color: white;
         }
 
-        .recycling-table {
+        .request-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .recycling-table th, .recycling-table td {
+        .request-table th, .request-table td {
             border: 1px solid #ccc;
             padding: 10px;
             text-align: left;
         }
 
-        .recycling-table th {
+        .request-table th {
             background-color: #4CAF50;
             color: white;
         }
-        .h1{
+
+        .h1 {
             font-size: xx-large;
         }
-        h2{
+
+        h2 {
             margin-left: 200px;
         }
-        #schedule-waste, #view-schedule, #track-recycling{
-            height: 50px;
-        }
+        #view-requests,
+#create-schedule,
+#view-schedule {
+    background-color: #45a049; 
+    border: none;
+    height: 50px;
+    color: white;
+}
+
     </style>
 </head>
 <body>
@@ -184,8 +196,8 @@
         <div class="logo">
             <img src="../images/GUARD (1).png" alt="EcoWaste">
         </div>
-        <p class="h1">EcoWaste System</p>
-        <a href="./components/main.html" class="donate-btn">Logout</a>
+        <p class="h1">Waste Collector Dashboard</p>
+        <a href="../EcoWaste/components/main.html" class="donate-btn">Logout</a>
     </nav>
 
     <main>
@@ -193,20 +205,18 @@
         <section id="dashboard-section">
             <h2>Dashboard</h2>
             <nav>
-                <button id="schedule-waste">Schedule Waste Collection</button>
+                <button id="view-requests">View Requests</button>
+                <button id="create-schedule">Create Collection Schedule</button>
                 <button id="view-schedule">View Collection Schedule</button>
-                <button id="track-recycling">Track Recycling Efforts</button>
-                
             </nav>
-
-            <div id="content">
-                
-                
-        <p>This is some static content that appears below the navigation buttons.</p>
-
-            </div>
         </section>
     </main>
+
+    <div id="content">
+        <!-- Static content -->
+        <h3>Welcome to the Waste Collector Dashboard</h3>
+        <p>Use the buttons above to manage waste collection requests and schedules.</p>
+    </div>
 
     <footer>
         <p>&copy; 2024 EcoWaste System</p>
@@ -216,30 +226,81 @@
         document.addEventListener('DOMContentLoaded', function () {
             const dashboardSection = document.getElementById('dashboard-section');
 
-            document.getElementById('schedule-waste').addEventListener('click', function () {
-                loadContent('Schedule Waste Collection', `
-                    <h3>Schedule Waste Collection</h3>
-                    <form id="schedule-form">
+            document.getElementById('view-requests').addEventListener('click', function () {
+                loadContent('Waste Collection Requests', `
+                    <h3>Waste Collection Requests</h3>
+                    <table class="request-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="request-data">
+                            <!-- Request data will be dynamically loaded here -->
+                        </tbody>
+                    </table>
+                `);
+
+                // Example request data
+                const requestData = [
+                    { date: '2024-06-24', time: '09:00', location: 'Park Street' },
+                    { date: '2024-06-25', time: '11:00', location: '5th Avenue' },
+                    { date: '2024-06-26', time: '10:00', location: 'Central Square' }
+                ];
+
+                const requestDataTbody = document.getElementById('request-data');
+                requestData.forEach(item => {
+                    const row = `
+                        <tr>
+                            <td>${item.date}</td>
+                            <td>${item.time}</td>
+                            <td>${item.location}</td>
+                            <td><button class="schedule-btn">Schedule</button></td>
+                        </tr>
+                    `;
+                    requestDataTbody.innerHTML += row;
+                });
+
+                // Add event listeners for schedule buttons
+                const scheduleButtons = document.querySelectorAll('.schedule-btn');
+                scheduleButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const row = this.closest('tr');
+                        const date = row.cells[0].textContent;
+                        const time = row.cells[1].textContent;
+                        const location = row.cells[2].textContent;
+                        scheduleCollection(date, time, location);
+                    });
+                });
+            });
+
+            document.getElementById('create-schedule').addEventListener('click', function () {
+                loadContent('Create Collection Schedule', `
+                    <h3>Create Collection Schedule</h3>
+                    <form id="create-schedule-form">
                         <input type="date" id="collection-date" required>
                         <input type="time" id="collection-time" required>
                         <input type="text" id="collection-location" placeholder="Location" required>
-                        <button type="submit">Schedule</button>
+                        <button type="submit">Create Schedule</button>
                     </form>
                 `);
 
-                document.getElementById('schedule-form').addEventListener('submit', function (e) {
+                document.getElementById('create-schedule-form').addEventListener('submit', function (e) {
                     e.preventDefault();
                     const date = document.getElementById('collection-date').value;
                     const time = document.getElementById('collection-time').value;
                     const location = document.getElementById('collection-location').value;
-                    // Schedule waste collection logic here
-                    console.log('Waste collection scheduled for:', { date, time, location });
+                    // Logic to create collection schedule
+                    console.log('Collection schedule created for:', { date, time, location });
                 });
             });
 
             document.getElementById('view-schedule').addEventListener('click', function () {
-                loadContent('Upcoming Waste Collection Schedule', `
-                    <h3>Upcoming Waste Collection Schedule</h3>
+                loadContent('View Collection Schedule', `
+                    <h3>View Collection Schedule</h3>
                     <table class="schedule-table">
                         <thead>
                             <tr>
@@ -274,50 +335,19 @@
                 });
             });
 
-            document.getElementById('track-recycling').addEventListener('click', function () {
-                loadContent('Track Recycling Efforts', `
-                    <h3>Recycling Tracker</h3>
-                    <p>Track your recycling efforts and view your environmental impact.</p>
-                    <table class="recycling-table">
-                        <thead>
-                            <tr>
-                                <th>Material</th>
-                                <th>Amount (kg)</th>
-                                <th>Price per kg ($)</th>
-                                <th>Total Value ($)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recycling-data">
-                            <!-- Recycling data will be dynamically loaded here -->
-                        </tbody>
-                    </table>
-                `);
-
-                // Example recycling data
-                const recyclingData = [
-                    { material: 'Plastic', amount: 10, pricePerKg: 0.5 },
-                    { material: 'Glass', amount: 5, pricePerKg: 0.2 },
-                    { material: 'Paper', amount: 20, pricePerKg: 0.1 }
-                ];
-
-                const recyclingDataTbody = document.getElementById('recycling-data');
-                recyclingData.forEach(item => {
-                    const totalValue = item.amount * item.pricePerKg;
-                    const row = `
-                        <tr>
-                            <td>${item.material}</td>
-                            <td>${item.amount}</td>
-                            <td>${item.pricePerKg}</td>
-                            <td>${totalValue.toFixed(2)}</td>
-                        </tr>
-                    `;
-                    recyclingDataTbody.innerHTML += row;
-                });
-            });
-
             function loadContent(title, content) {
                 const contentDiv = document.getElementById('content');
-                contentDiv.innerHTML = `<h2>${title}</h2>${content}`;
+                // Reset contentDiv and append static content and dynamic content
+                contentDiv.innerHTML = `
+                    <h3>${title}</h3>
+                    ${content}
+                `;
+            }
+
+            function scheduleCollection(date, time, location) {
+                // Logic to handle scheduling of collection
+                console.log('Scheduled collection for:', { date, time, location });
+                // You can update UI or send data to server as needed
             }
         });
     </script>
