@@ -15,8 +15,6 @@
             min-height: 100vh;
         }
 
-      
-
         .contact-info span, .social-links a {
             margin: 0 10px;
         }
@@ -167,24 +165,26 @@
             background-color: #4CAF50;
             color: white;
         }
-        .h1{
+
+        .h1 {
             font-size: xx-large;
         }
-        h2{
+
+        h2 {
             margin-left: 200px;
         }
-        #schedule-waste, #view-schedule, #track-recycling{
+
+        #schedule-waste, #view-schedule, #track-recycling {
             height: 50px;
         }
     </style>
 </head>
 <body>
-    
     <nav>
         <div class="logo">
             <img src="../images/GUARD (1).png" alt="EcoWaste">
         </div>
-        <p class="h1">EcoWaste System</p>
+        <p class="h1">Household Dashboard</p>
         <a href="./components/main.html" class="donate-btn">Logout</a>
     </nav>
 
@@ -196,14 +196,10 @@
                 <button id="schedule-waste">Schedule Waste Collection</button>
                 <button id="view-schedule">View Collection Schedule</button>
                 <button id="track-recycling">Track Recycling Efforts</button>
-                
             </nav>
 
             <div id="content">
-                
-                
-        <p>This is some static content that appears below the navigation buttons.</p>
-
+                <p>This is some static content that appears below the navigation buttons.</p>
             </div>
         </section>
     </main>
@@ -223,7 +219,8 @@
                         <input type="date" id="collection-date" required>
                         <input type="time" id="collection-time" required>
                         <input type="text" id="collection-location" placeholder="Location" required>
-                        <button type="submit">Schedule</button>
+                        <button type="submit">Accept</button>
+                        <button type="button" id="reschedule">Reschedule</button>
                     </form>
                 `);
 
@@ -232,8 +229,16 @@
                     const date = document.getElementById('collection-date').value;
                     const time = document.getElementById('collection-time').value;
                     const location = document.getElementById('collection-location').value;
-                    // Schedule waste collection logic here
-                    console.log('Waste collection scheduled for:', { date, time, location });
+                    // Accept waste collection logic here
+                    console.log('Waste collection accepted for:', { date, time, location });
+                });
+
+                document.getElementById('reschedule').addEventListener('click', function () {
+                    const date = document.getElementById('collection-date').value;
+                    const time = document.getElementById('collection-time').value;
+                    const location = document.getElementById('collection-location').value;
+                    // Reschedule waste collection logic here
+                    console.log('Waste collection rescheduled for:', { date, time, location });
                 });
             });
 
