@@ -3,9 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EcoWaste</title>
+    <link rel="stylesheet" href="components/header.css">
+    <link rel="stylesheet" href="components/footer.css">
+    <link rel="stylesheet" href="components/home.css">
+    <link rel="stylesheet" href="components/about.css">
+    <link rel="stylesheet" href="components/contactus.css">
+    <link rel="stylesheet" href="components/service.css">
 </head>
 <body>
-    <P>Hello</P>
+    <div id="header"></div>
+    <div id="content"></div>
+    <div id="about"></div>
+    <div id="service"></div>
+    <div id="contactus"></div>
+    <div id="footer"></div>
+
+    <script>
+        function loadPage(page) {
+            let pageUrl = '';
+            switch(page) {
+                case 'home':
+                    pageUrl = 'components/home.html'; // Update path to match components folder
+                    break;
+                case 'about':
+                    pageUrl = 'components/about.html'; // Update path to match components folder
+                    break;
+                case 'service':
+                    pageUrl = 'components/service.html'; // Update path to match components folder
+                    break;
+                case 'contact':
+                    pageUrl = 'components/contactus.html'; // Update path to match components folder
+                    break;
+                default:
+                    pageUrl = 'components/home.html'; // Default to home.html in components folder
+                    break;
+            }
+
+            fetch(pageUrl)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching the page:', error);
+                    document.getElementById('content').innerHTML = '<p>Error loading page. Please try again later.</p>';
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('components/header.html') // Update path to match components folder
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+
+            fetch('components/about.html') // Update path to match components folder
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('about').innerHTML = data;
+                });
+
+            fetch('components/service.html') // Update path to match components folder
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('service').innerHTML = data;
+                });
+
+            fetch('components/contactus.html') // Update path to match components folder
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contactus').innerHTML = data;
+                });
+
+            fetch('components/footer.html') // Update path to match components folder
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                });
+
+            loadPage('home'); // Load initial page content
+        });
+    </script>
 </body>
 </html>

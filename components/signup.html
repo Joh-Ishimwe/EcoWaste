@@ -11,7 +11,7 @@
     <div class="signup-container">
         <div class="signup-box">
             <h2>User Signup</h2>
-            <form>
+            <form id="signup-form">
                 <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
@@ -30,10 +30,10 @@
                         <option value="" disabled selected>Select your role</option>
                         <option value="household">Household User</option>
                         <option value="waste-collection">Waste Collector User</option>
-                
                     </select>
                 </div>
-                <button href="otp.html" type="submit">Signup</button>
+                <button type="submit">Signup</button>
+                <div id="signup-message" class="message"></div> <!-- Message display area -->
                 <div class="login-link">
                     Already a member? <a href="login.html">Login now</a>
                 </div>
@@ -55,6 +55,53 @@
                 .then(data => {
                     document.getElementById('footer').innerHTML = data;
                 });
+
+            const signupForm = document.getElementById('signup-form');
+            const signupMessage = document.getElementById('signup-message');
+
+            signupForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const role = document.getElementById('role').value;
+
+                const requestBody = {
+                    username: username,
+                    email: email,
+                    password: password,
+                    role: role
+                };
+
+                fetch('https://ecowaste-backend-4.onrender.com/api/v1/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Signup successful
+                    console.log('Signup successful:', data);
+                    signupMessage.textContent = 'Signup successful! Redirecting to verification page...';
+                    // Redirect to verification page after delay
+                    setTimeout(function() {
+                        window.location.href = 'verify.html';
+                    }, 2000); // 2 seconds delay before redirection
+                })
+                .catch(error => {
+                    // Signup failed
+                    console.error('Error signing up:', error.message);
+                    signupMessage.textContent = 'Signup failed. Please try again.';
+                });
+            });
         });
     </script>
 </body>

@@ -9,19 +9,16 @@ body {
     background-color: #f0f0f0;
 }
 
-<<<<<<< HEAD
-.signup-container {
-=======
+
 
 .login-container, .signup-container {
->>>>>>> dc4a8d79e7597f84b48e16d4fcbfbbe5d77a8382
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 450px;
     padding: 20px;
-    margin: 50px 500px;
+    margin: 50px 420px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
