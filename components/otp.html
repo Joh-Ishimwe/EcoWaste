@@ -18,7 +18,7 @@
             <input type="text" id="otp5" maxlength="1" onkeyup="moveToNext(this, 'otp6')">
             <input type="text" id="otp6" maxlength="1" onkeyup="moveToNext(this, '')">
         </div>
-        <button href="login.html" onclick="verifyOTP()">Verify OTP</button>
+        <button onclick="verifyOTP()">Verify OTP</button>
     </div>
 
     <script>
@@ -48,6 +48,8 @@
             // Example of verification logic
             if (otp === "123456") { // Replace "123456" with actual OTP for verification
                 alert("OTP Verified Successfully!");
+                // Redirect to login page after successful verification
+                window.location.href = 'login.html';
             } else {
                 alert("Invalid OTP. Please try again.");
             }

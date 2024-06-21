@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../EcoWaste/components/header.css">
-    <title>Waste Collector Dashboard</title>
+    <title>Admin Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@
         }
 
         .toph {
-            background:  #4CAF50;
+            background: #4CAF50;
             color: white;
             padding: 10px;
             display: flex;
@@ -62,8 +62,8 @@
             font-weight: bold;
         }
 
-        nav .donate-btn {
-            background:  #4CAF50;
+        nav .logout-btn {
+            background: #4CAF50;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
@@ -79,7 +79,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: auto; /* Push footer to bottom */
+            margin-top: auto;
         }
 
         main {
@@ -97,7 +97,7 @@
 
         section {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             margin-bottom: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -134,40 +134,24 @@
         #content {
             border: 1px solid #ccc;
             padding: 20px;
-            margin: 20px 30px; /* Add margin to separate from the buttons */
+            margin: 20px 30px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .schedule-table {
+        .request-table, .schedule-table, .user-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .schedule-table th, .schedule-table td {
+        .request-table th, .request-table td, .schedule-table th, .schedule-table td, .user-table th, .user-table td {
             border: 1px solid #ccc;
             padding: 10px;
             text-align: left;
         }
 
-        .schedule-table th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .request-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .request-table th, .request-table td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
-
-        .request-table th {
+        .request-table th, .schedule-table th, .user-table th {
             background-color: #4CAF50;
             color: white;
         }
@@ -179,10 +163,10 @@
         h2 {
             margin-left: 200px;
         }
-        
+
         #view-requests,
-        #create-schedule,
-        #view-schedule {
+        #manage-schedules,
+        #manage-users {
             background-color: #45a049; 
             border: none;
             height: 50px;
@@ -197,8 +181,8 @@
         <div class="logo">
             <img src="../images/GUARD (1).png" alt="EcoWaste">
         </div>
-        <p class="h1">Waste Collector Dashboard</p>
-        <a href="../EcoWaste/components/main.html" class="donate-btn">Logout</a>
+        <p class="h1">Admin Dashboard</p>
+        <a href="../EcoWaste/components/main.html" class="logout-btn">Logout</a>
     </nav>
 
     <main>
@@ -207,16 +191,16 @@
             <h2>Dashboard</h2>
             <nav>
                 <button id="view-requests">View Requests</button>
-                <button id="create-schedule">Create Collection Schedule</button>
-                <button id="view-schedule">View Collection Schedule</button>
+                <button id="manage-schedules">Manage Schedules</button>
+                <button id="manage-users">Manage Users</button>
             </nav>
         </section>
     </main>
 
     <div id="content">
         <!-- Static content -->
-        <h3>Welcome to the Waste Collector Dashboard</h3>
-        <p>Use the buttons above to manage waste collection requests and schedules.</p>
+        <h3>Welcome to the Admin Dashboard</h3>
+        <p>Use the buttons above to manage user requests, schedules, and users.</p>
     </div>
 
     <footer>
@@ -228,8 +212,8 @@
             const dashboardSection = document.getElementById('dashboard-section');
 
             document.getElementById('view-requests').addEventListener('click', function () {
-                loadContent('Waste Collection Requests', `
-                    <h3>Waste Collection Requests</h3>
+                loadContent('View Requests', `
+                    <h3>View Requests</h3>
                     <table class="request-table">
                         <thead>
                             <tr>
@@ -262,13 +246,14 @@
                             <td>
                                 <button class="accept-btn">Accept</button>
                                 <button class="reschedule-btn">Reschedule</button>
+                                <button class="delete-btn">Delete</button>
                             </td>
                         </tr>
                     `;
                     requestDataTbody.innerHTML += row;
                 });
 
-                // Add event listeners for accept and reschedule buttons
+                // Add event listeners for buttons
                 const acceptButtons = document.querySelectorAll('.accept-btn');
                 acceptButtons.forEach(button => {
                     button.addEventListener('click', function () {
@@ -290,38 +275,35 @@
                         rescheduleRequest(date, time, location);
                     });
                 });
+
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const row = this.closest('tr');
+                        row.remove();
+                        // Add logic to handle deletion if necessary
+                    });
+                });
             });
 
-            document.getElementById('create-schedule').addEventListener('click', function () {
-                loadContent('Create Collection Schedule', `
-                    <h3>Create Collection Schedule</h3>
+            document.getElementById('manage-schedules').addEventListener('click', function () {
+                loadContent('Manage Schedules', `
+                    <h3>Manage Schedules</h3>
                     <form id="create-schedule-form">
                         <input type="date" id="collection-date" required>
                         <input type="time" id="collection-time" required>
                         <input type="text" id="collection-location" placeholder="Location" required>
                         <button type="submit">Create Schedule</button>
                     </form>
-                `);
-
-                document.getElementById('create-schedule-form').addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const date = document.getElementById('collection-date').value;
-                    const time = document.getElementById('collection-time').value;
-                    const location = document.getElementById('collection-location').value;
-                    // Logic to create collection schedule
-                    console.log('Collection schedule created for:', { date, time, location });
-                });
-            });
-
-            document.getElementById('view-schedule').addEventListener('click', function () {
-                loadContent('View Collection Schedule', `
-                    <h3>View Collection Schedule</h3>
+                    <h3>Current Schedules</h3>
                     <table class="schedule-table">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                               
+                        <th>Date</th>
                                 <th>Time</th>
                                 <th>Location</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="schedule-data">
@@ -344,9 +326,100 @@
                             <td>${item.date}</td>
                             <td>${item.time}</td>
                             <td>${item.location}</td>
+                            <td>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
                         </tr>
                     `;
                     scheduleDataTbody.innerHTML += row;
+                });
+
+                // Add event listeners for buttons
+                const editButtons = document.querySelectorAll('.edit-btn');
+                editButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const row = this.closest('tr');
+                        const date = row.cells[0].textContent;
+                        const time = row.cells[1].textContent;
+                        const location = row.cells[2].textContent;
+                        editSchedule(date, time, location);
+                    });
+                });
+
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const row = this.closest('tr');
+                        row.remove();
+                        // Add logic to handle deletion if necessary
+                    });
+                });
+            });
+
+            document.getElementById('manage-users').addEventListener('click', function () {
+                loadContent('Manage Users', `
+                    <h3>Manage Users</h3>
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-data">
+                            <!-- User data will be dynamically loaded here -->
+                        </tbody>
+                    </table>
+                `);
+
+                // Example user data
+                const userData = [
+                    { name: 'John Doe', email: 'john.doe@example.com', role: 'User', status: 'Active' },
+                    { name: 'Jane Smith', email: 'jane.smith@example.com', role: 'Admin', status: 'Active' },
+                    { name: 'Mark Johnson', email: 'mark.johnson@example.com', role: 'User', status: 'Inactive' }
+                ];
+
+                const userDataTbody = document.getElementById('user-data');
+                userData.forEach(user => {
+                    const row = `
+                        <tr>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.role}</td>
+                            <td>${user.status}</td>
+                            <td>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                    userDataTbody.innerHTML += row;
+                });
+
+                // Add event listeners for buttons
+                const editButtons = document.querySelectorAll('.edit-btn');
+                editButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const row = this.closest('tr');
+                        const name = row.cells[0].textContent;
+                        const email = row.cells[1].textContent;
+                        const role = row.cells[2].textContent;
+                        const status = row.cells[3].textContent;
+                        editUser(name, email, role, status);
+                    });
+                });
+
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const row = this.closest('tr');
+                        row.remove();
+                        // Add logic to handle deletion if necessary
+                    });
                 });
             });
 
@@ -360,14 +433,26 @@
             }
 
             function acceptRequest(date, time, location) {
-                // Logic to handle accepting a collection request
+                // Logic to accept request
                 console.log('Accepted request for:', { date, time, location });
                 // You can update UI or send data to server as needed
             }
 
             function rescheduleRequest(date, time, location) {
-                // Logic to handle rescheduling a collection request
+                // Logic to reschedule request
                 console.log('Rescheduled request for:', { date, time, location });
+                // You can update UI or send data to server as needed
+            }
+
+            function editSchedule(date, time, location) {
+                // Logic to edit schedule
+                console.log('Editing schedule for:', { date, time, location });
+                // You can update UI or send data to server as needed
+            }
+
+            function editUser(name, email, role, status) {
+                // Logic to edit user details
+                console.log('Editing user:', { name, email, role, status });
                 // You can update UI or send data to server as needed
             }
         });
