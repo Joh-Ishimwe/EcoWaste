@@ -17,7 +17,7 @@ This is an Enterprise Web Development Project which focuses on building a compre
 - **Waste Collection Services Management**: Manage routes, schedules, and performance.
 - **Admin Dashboard**: Monitor system performance and manage users.
 
-## Technologies Used
+## Technologies Used:
 
 - **Frontend**: HTML, CSS and JavaScript
 - **Backend**: Node.js & RESTful APIs
