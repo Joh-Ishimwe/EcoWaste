@@ -219,8 +219,8 @@
                         <input type="date" id="collection-date" required>
                         <input type="time" id="collection-time" required>
                         <input type="text" id="collection-location" placeholder="Location" required>
-                        <button type="submit">Accept</button>
-                        <button type="button" id="reschedule">Reschedule</button>
+                        <button type="submit">submit</button>
+                        
                     </form>
                 `);
 
@@ -243,7 +243,7 @@
             });
 
             document.getElementById('view-schedule').addEventListener('click', function () {
-                loadContent('Upcoming Waste Collection Schedule', `
+                loadContent( `
                     <h3>Upcoming Waste Collection Schedule</h3>
                     <table class="schedule-table">
                         <thead>

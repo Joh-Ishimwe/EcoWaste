@@ -139,6 +139,12 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        #review-reachout {
+            background-color: #45a049; 
+            border: none;
+            height: 50px;
+            color: white;
+        }
 
         .request-table, .schedule-table, .user-table {
             width: 100%;
@@ -193,6 +199,7 @@
                 <button id="view-requests">View Requests</button>
                 <button id="manage-schedules">Manage Schedules</button>
                 <button id="manage-users">Manage Users</button>
+                <button id="review-reachout">Review Reachout</button>
             </nav>
         </section>
     </main>
@@ -456,6 +463,42 @@
                 // You can update UI or send data to server as needed
             }
         });
+        const reachoutData = [
+                    { name: 'Alice Johnson', email: 'alice.johnson@example.com', message: 'Need more information about your services.' },
+                    { name: 'Bob Brown', email: 'bob.brown@example.com', message: 'Interested in a partnership.' },
+                    { name: 'Charlie Davis', email: 'charlie.davis@example.com', message: 'How to volunteer?' }
+                ];
+
+                const reachoutDataTbody = document.getElementById('reachout-data');
+                reachoutData.forEach(item => {
+                    const row = `
+                        <tr>
+                            <td>${item.name}</td>
+                            <td>${item.email}</td>
+                            <td>${item.message}</td>
+                            <td>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                    reachoutDataTbody.innerHTML += row;
+                });
+
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const row = this.closest('tr');
+                        row.remove();
+                        // Add logic to handle deletion if necessary
+                    });
+                });
+                function loadContent(title, content) {
+                const contentDiv = document.getElementById('content');
+                // Reset contentDiv and append static content and dynamic content
+                contentDiv.innerHTML = `
+                    <h3>${title}</h3>
+                    ${content}
+                `;}
     </script>
 </body>
 </html>
